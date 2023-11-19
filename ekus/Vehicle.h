@@ -17,7 +17,7 @@ public:
 	const unsigned short getMaxPassengers() const; 
 
 	void setBrand(std::string brand);
-	void addPassenger ()
+	void addPassenger();
 
 
 };

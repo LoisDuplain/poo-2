@@ -1,0 +1,17 @@
+- Compile pas
+
+Person.hpp:
+- camelCase pas respectee + pourquoi il y a des 1 dans le nom des methods ?
+- Pas de setter pour le isTiedUp ?
++ Bon constructeur
+
+Person.cpp:
++ Bonne implementation
+
+Vehicle.hpp:
+- addPassenger prends pas de Person en parametre ?
++ camelCase respectee
+
+Le main ???
+
+Note: 05/20
