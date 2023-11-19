@@ -7,7 +7,7 @@ Person.hpp:
 + Pas de commentaire inutile
 
 Person.cpp:
-- parametre de takeDamage commence par un _
+- parametre de takeDamage commence par un _ et selon ton .hpp le parametre c'est la quantite de degat mais dans ton .cpp c'est la quantite de vie ?? et en plus tu ne soustrait jamais les damages passes en parametre mais -15 constamment ??
 - Pas de const pour les types des getters
 - Take damage mal securise
 + Bon constructeur
