@@ -1,0 +1,24 @@
+Person.hpp:
++ Conventions de nommage respectées (camelCase)
++ Les attributs sont privés
++ Les méthodes sont publiques
++ Methods bien organisées
+
+- il y a un getter getWeight et un qui s'appelle weight ? Redondant + weight n'est pas implemente...
+- Pas de setter pour weight
+- Pas de setter pour isTiedUp
+
+Person.cpp:
++ Bonne implementation sauf:
+- oublie du retour a la ligne a la fin du message dans un say (std::endl)
+
+Vehicule.hpp: (en anglais c'est Vehicle pas Vehicule)
++ Conventions de nommage respectées (camelCase)
+- Le constructeur n'est pas cense avoir le parametre _passengers
+
+General:
+- Manque de test
+- Manque crucial de travail
+-> https://www.youtube.com/watch?v=yVweJ4hkBrw
+
+Note: 5/20
