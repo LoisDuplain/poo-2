@@ -9,57 +9,51 @@ F1000tipla::F1000tipla(bool isTiedUp1, bool isTiedUp2) : Vehicle("Fiat", 1400, 3
     Person pierre("Pierre", 63);
 
     addPassenger(sylvain, isTiedUp1);
-    addPassenger(pierre, isTiedUp1);
+    addPassenger(pierre, isTiedUp2);
 }
 
 Vehicle F1000tipla::collide(Vehicle otherVehicle, int speed2)
 {
     int speed1 = 320;
-   
-
-    // Counting passengers tied up in the first vehicle (this)
-    int numberPassengersThis = this->getPassengerCount();
-
-    for (auto& passenger : getPassengers())
+    int speedDifference = speed1 - speed2;
+    
+    for (auto& passengerThis : getPassengers())
     {
-        if (!passenger.isDead())
+        if (!passengerThis.isDead())
         {
-            if (!passenger.getIsTiedUp())
+            if (!passengerThis.getIsTiedUp())
             {
-                passenger.setIsDead(true);
-                passenger.setHealth(0);
+                passengerThis.setIsDead(1);
+                passengerThis.setHealth(0);
 
-                passenger.takeDamage(passenger.getHealth());
+                std::string message = "Game over, my adventure has come to an end.";
+                std::cout << passengerThis.say(message) << std::endl;
             }
             else
             {
-                passenger.takeDamage(passenger.getHealth());
+                passengerThis.takeDamage(passengerThis.getHealth(), speedDifference);
             }
         }
     }
-
-    // Counting passengers tied up in the second vehicle (otherVehicle)
-    int numberPassengersOther = otherVehicle.getPassengerCount();
-
+    
     for (auto& passengerOther : otherVehicle.getPassengers())
     {
         if (!passengerOther.isDead())
         {
             if (!passengerOther.getIsTiedUp())
             {
-                passengerOther.setIsDead(true);
+                passengerOther.setIsDead(1);
                 passengerOther.setHealth(0);
 
-                passengerOther.takeDamage(passengerOther.getHealth());
+                std::string message = "Game over, my adventure has come to an end.";
+                std::cout << passengerOther.say(message) << std::endl;
             }
             else
             {
-                passengerOther.takeDamage(passengerOther.getHealth());
+                passengerOther.takeDamage(passengerOther.getHealth(), speedDifference);
             }
         }
     }
 
-    Vehicle winner = Vehicle::collide(otherVehicle, speed1, speed2);
-
-    return winner;
+    return *this;
 }

@@ -7,20 +7,20 @@ Vehicle::Vehicle(std::string brand, int weight, unsigned short maxPassengers)
 	:_brand(brand), _weight(weight), _passengers(), _maxPassengers(maxPassengers)
 {};
 
-void Vehicle::addPassenger(const Person& person, bool newIsTiedUp)
+void Vehicle::addPassenger(Person& person, bool newIsTiedUp)
 {	
-	int numberPassengers = this->getPassengerCount();
+	int numberPassengers = getPassengerCount();
 
 	if (numberPassengers == _maxPassengers)
 	{
-		std::cout << "The " << this->getBrand() << " vehicle is full.No more passengers can be added." << std::endl;
+		std::cout << "The " << getBrand() << " vehicle is full.No more passengers can be added." << std::endl;
 	}
 	else
 	{
 		const_cast<Person&>(person).setIsTiedUp(newIsTiedUp);
 
 		_passengers.push_back(person);
-		std::cout << "Passenger " << person.getFullName() << " has been added in " << this->getBrand() << " vehicle." << std::endl;
+		std::cout << "Passenger " << person.getFullName() << " has been added in " << getBrand() << " vehicle." << std::endl;
 	}
 
 };
@@ -55,15 +55,9 @@ Vehicle Vehicle::collide(Vehicle otherVehicle, int speed1, int speed2)
 	}
 }
 
-//----------------------------------------------------------------- GETTER AND SETTER
 std::string Vehicle::getBrand()
 {
 	return _brand;
-};
-
-void Vehicle::setBrand(std::string newBrand)
-{
-	_brand = newBrand;
 };
 
 std::list<Person>& Vehicle::getPassengers()
@@ -87,7 +81,7 @@ int Vehicle::getWeight()
 
 	for (const auto& passenger : _passengers)
 	{
-		totalWeight += passenger.getPersonWeight();
+		totalWeight += const_cast<Person&>(passenger).getPersonWeight();
 	}
 
 	return totalWeight;
@@ -98,7 +92,12 @@ int Vehicle::getMomentum(int speed)
 	return speed * this->getWeight();
 }
 
-int Vehicle::getPassengerCount() const
+int Vehicle::getPassengerCount()
 {
 	return _passengers.size();
 }
+
+void Vehicle::setBrand(std::string newBrand)
+{
+	_brand = newBrand;
+};

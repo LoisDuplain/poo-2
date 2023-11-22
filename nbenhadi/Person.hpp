@@ -15,15 +15,15 @@ private:
 public:
     Person(std::string fullName, int weight);
 
-    std::string Say(std::string message);
-    unsigned short takeDamage(unsigned short damage);
+    std::string say(std::string message);
+    unsigned short takeDamage(unsigned short health, int speedDifference);
 
-    std::string getFullName() const;
-    int getPersonWeight() const;
-    bool getIsTiedUp() const;
-    unsigned short getMaxHealth() const;
-    unsigned short getHealth() const;
-    bool isDead() const;
+    std::string getFullName();
+    int getPersonWeight();
+    bool getIsTiedUp();
+    unsigned short getMaxHealth();
+    unsigned short getHealth();
+    bool isDead();
 
     void setFullName(std::string newFullName);
     void setWeight(int newWeight);

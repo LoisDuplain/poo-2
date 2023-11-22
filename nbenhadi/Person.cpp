@@ -1,81 +1,117 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "Person.hpp"
+#include "Vehicle.hpp"
 
 Person::Person(std::string fullName, int weight)
 	:_fullName(fullName), _weight(weight), _isTiedUp(false), _maxHealth(100), _health(100), _isDead(false)
 {};
 
-std::string Person::Say(std::string message)
+std::string Person::say(std::string message)
 {
 	return getFullName() + ": " + message;
 };
 
-unsigned short Person::takeDamage(unsigned short _health)
+unsigned short Person::takeDamage(unsigned short health, int speedDifference)
 {
-	unsigned short newHealth = _health;
-	std::string message;
+    unsigned short newHealth = health;
+    std::string message;
 
-	if (_health <= 0) {
-		newHealth = 0;
-		_isDead = true;
+    if (getHealth() <= 0 && getHealth() > getMaxHealth() || isDead()) 
+    {
+        this->setHealth(0);
+        this->setIsDead(1);
 
-		message = "Game over, my adventure has come to an end.";
-		std::cout << Say(message) << std::endl;
-	}
-	else {
-		newHealth -= 15;
+        message = "Game over, my adventure has come to an end.";
+        std::cout << say(message) << std::endl;
 
-		if (newHealth > _maxHealth)
-		{
-			newHealth = 0;
+        return _health;
+    }
+    else
+    {
+        srand(time(0));
+        int minBaseDamage = 9;
+        int maxBaseDamage = 12;
+        int baseDamage = minBaseDamage + rand() % (maxBaseDamage + 1 - minBaseDamage);
+        speedDifference = abs(speedDifference);
 
-			message = "Game over, my adventure has come to an end.";
-			std::cout << Say(message) << std::endl;
-		}
-		else 
-		{
-			message = "Ouch! I lost 15 life points for not being tied up.";
-			Say(message);
+        int additionalDamage = 0;
 
-			setHealth(newHealth);
-			std::cout << Say(message) << " I now have " << getHealth() << " life points." << std::endl;
-		}
-	}
-	return _health;
+        if (speedDifference <= 0)
+        {
+            additionalDamage = rand() % 3 + 9;
+        }
+        else if (speedDifference <= 30)
+        {
+            additionalDamage = rand() % 4 + 14;
+        }
+        else if (speedDifference <= 60)
+        {
+            additionalDamage = rand() % 4 + 17;
+        }
+        else
+        {
+            additionalDamage = rand() % 5 + 19;
+        }
+
+        int damage = baseDamage + additionalDamage;
+        newHealth -= damage;
+        setHealth(newHealth);
+        
+
+        if (newHealth > _maxHealth || newHealth <= 0)
+        {
+            setHealth(0);
+            setIsDead(1);
+
+            message = "Game over, my adventure has come to an end.";
+            std::cout << say(message) << std::endl;
+        }
+        else 
+        {
+            message = "Ouch! I lost ";
+            say(message);
+
+            setHealth(newHealth);
+            std::cout << say(message) << damage << " life points for not being tied up." << " I now have " << getHealth() << " life points." << std::endl;
+
+            return _health;
+        }
+    }
+    return _health;
 }
 
-//----------------------------------------------------------------- GETTER AND SETTER
-std::string Person::getFullName() const
+
+std::string Person::getFullName()
 {
 	return _fullName;
 };
 
-int Person::getPersonWeight() const
+int Person::getPersonWeight()
 {
 	return _weight;
 };
 
-bool Person::getIsTiedUp() const
+bool Person::getIsTiedUp()
 {
 	return _isTiedUp;
 };
 
-unsigned short Person::getMaxHealth() const
+unsigned short Person::getMaxHealth()
 {
 	return _maxHealth;
 }
 
-unsigned short Person::getHealth() const
+unsigned short Person::getHealth()
 {
 	return _health;
 }
 
-bool Person::isDead() const
+bool Person::isDead()
 {
 	return _isDead;
 }
-
-
 
 void Person::setFullName(std::string newFullName)
 {

@@ -21,11 +21,11 @@ public:
 	int getEmptyWeight();
 	int getWeight();
 	int getMomentum(int speed);
-	int getPassengerCount() const;
+	int getPassengerCount();
 
 	void setBrand(std::string newBrand);
 
-	void addPassenger(const Person& person, bool newIsTiedUp);
+	void addPassenger(Person& person, bool newIsTiedUp);
 	/*void removePassenger(Person name);*/
 	virtual Vehicle collide(Vehicle otherVehicle, int speed1, int speed2);
 };

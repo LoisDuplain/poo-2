@@ -7,33 +7,31 @@
 
 void main()
 {
+	
 	Person person1("Lois", 65);
-	/*Person person2("Duplain", 85);
-	Person person3("Emma", 92);
+	Person person2("Duplain", 85);
+	Person person3("Emma", 54);
 
 	Vehicle vehicle1("Peugeot 208", 1160, 5);
 	Vehicle vehicle2("Citroen C3", 1090, 5);
 
 	Bus bus1(12500);
-	Bus bus2(300);
-	Bus bus3(14000);
-	Bus bus4(13908);
 
-	vehicle1.addPassenger(person1, 1);
+	F1000tipla F1(1, 0);
+	F1000tipla F2(0, 1);
+
+	vehicle1.addPassenger(person1, true);
+	std::cout << "Is Lois tied up ? " << person1.getIsTiedUp() << std::endl;
+
 	vehicle2.addPassenger(person2, 0);
-	bus4.addPassenger(person3, 1);
-
-	std::cout << std::endl;*/
-	/*
-	bus1.collide(vehicle2, 90, 109);
-	bus2.collide(vehicle1, 40, 100);
-	bus3.collide(bus4, 70, 70);
-
-	std::cout << std::endl << std::endl;
-	*/
-	/*F1000tipla F1(0, 1);
+	vehicle2.addPassenger(person3, 1);
+	/*bus1.addPassenger(person3, 0);*/
 
 	std::cout << std::endl;
 
-	F1.collide(bus4, 100);*/
+	/*bus1.collide(vehicle1, 70, 90);*/
+
+	F1.collide(vehicle2, 100);
+	std::cout << std::endl;
+	F1.collide(vehicle2, 300);
 }
